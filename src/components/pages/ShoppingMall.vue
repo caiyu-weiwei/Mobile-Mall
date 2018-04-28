@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data () {
     return {
@@ -33,6 +34,23 @@ export default {
         {imageUrl: 'http://7xjyw1.com1.z0.glb.clouddn.com/simleVueDemoPic002.jpg'},
         {imageUrl: 'http://7xjyw1.com1.z0.glb.clouddn.com/simleVueDemoPic003.jpg'}
       ]
+    }
+  },
+  created () {
+    this.getDataList()
+  },
+  methods: {
+    getDataList () {
+      axios({
+        url: 'https://www.easy-mock.com/mock/5ae424cfe3aaf3049f0674a3/index/',
+        method: 'get'
+      })
+        .then((res) => {
+          console.log(res)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     }
   }
 }
