@@ -43,19 +43,7 @@
             </div>
           </swiper-slide>
         </swiper>
-        <div class="floor-anormaly">
-          <div class="floor-one">
-            <img :src="floor1_0.image" style="width:100%;">
-          </div>
-          <div class="floor-two">
-            <div>
-            <img :src="floor1_1.image" style="width:100%;">
-          </div>
-          <div>
-            <img :src="floor1_2.image" style="width:100%;">
-          </div>
-          </div>
-        </div>
+        <floorComponent :floorData="floor1"></floorComponent>
       </div>
     </div>
   </div>
@@ -65,6 +53,7 @@
 import axios from 'axios'
 import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import floorComponent from '../component/floorComponent'
 export default {
   data () {
     return {
@@ -76,15 +65,13 @@ export default {
       swiperOption: {
         slidesPerView: 3
       },
-      floor1: [],
-      floor1_0: {},
-      floor1_1: {},
-      floor1_2: {}
+      floor1: []
     }
   },
   components: {
     swiper,
-    swiperSlide
+    swiperSlide,
+    floorComponent
   },
   created () {
     this.getDataList()
@@ -102,9 +89,6 @@ export default {
           this.advList = res.data.data.advertesPicture
           this.recommendGoods = res.data.data.recommend
           this.floor1 = res.data.data.floor1
-          this.floor1_0 = this.floor1[0]
-          this.floor1_1 = this.floor1[1]
-          this.floor1_2 = this.floor1[2]
         })
         .catch((error) => {
           console.log(error)
@@ -170,9 +154,5 @@ export default {
   font-size: 12px;
   text-align: center;
 }
-.floor-anormaly{
-  display: flex;
-  flex-direction: row;
-  background-color: #fff;
-}
+
 </style>
