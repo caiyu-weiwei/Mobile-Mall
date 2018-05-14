@@ -16,9 +16,18 @@
     <div class="banner-area">
       <van-swipe :autoplay = "3000">
         <van-swipe-item v-for="(banner, index) in bannerArray" :key="index" v-lazy="banner">
-          <img :src="banner.imageUrl" alt="banner">
+          <img :src="banner.image" alt="banner">
         </van-swipe-item>
       </van-swipe>
+    </div>
+    <div class="nav-bar">
+      <div v-for="(nav, index) in navList" :key="index">
+        <img v-lazy="nav.image" style="width:90%;">
+        <p>{{nav.mallCategoryName}}</p>
+      </div>
+    </div>
+    <div class="adv-bar">
+      <img v-lazy="advList.PICTURE_ADDRESS" style="width:100%;">
     </div>
   </div>
 </template>
@@ -29,11 +38,9 @@ export default {
   data () {
     return {
       location: require('../../assets/images/location.png'),
-      bannerArray: [
-        {imageUrl: 'http://7xjyw1.com1.z0.glb.clouddn.com/simleVueDemoPic001.jpg'},
-        {imageUrl: 'http://7xjyw1.com1.z0.glb.clouddn.com/simleVueDemoPic002.jpg'},
-        {imageUrl: 'http://7xjyw1.com1.z0.glb.clouddn.com/simleVueDemoPic003.jpg'}
-      ]
+      bannerArray: [],
+      navList: [],
+      advList: []
     }
   },
   created () {
@@ -47,6 +54,9 @@ export default {
       })
         .then((res) => {
           console.log(res)
+          this.bannerArray = res.data.data.slides
+          this.navList = res.data.data.category
+          this.advList = res.data.data.advertesPicture
         })
         .catch((error) => {
           console.log(error)
@@ -81,5 +91,19 @@ export default {
 }
 .banner-area img{
   width: 100%;
+}
+.nav-bar{
+  margin: .3rem;
+  font-size: 14px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  background-color: #fff;
+  border-radius: .3rem;
+}
+.nav-bar div{
+  font-size: 12px;
+  text-align: center;
+  padding: .3rem;
 }
 </style>
