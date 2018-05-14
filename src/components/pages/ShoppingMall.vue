@@ -29,11 +29,19 @@
     <div class="adv-bar">
       <img v-lazy="advList.PICTURE_ADDRESS" style="width:100%;">
     </div>
+    <div class="recommend-area">
+      <div class="recommend-title">
+        推荐商品
+      </div>
+      <div class="recommend-body"></div>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import 'swiper/dist/css/swiper.css'
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
 export default {
   data () {
     return {
@@ -42,6 +50,10 @@ export default {
       navList: [],
       advList: []
     }
+  },
+  components: {
+    swiper,
+    swiperSlide
   },
   created () {
     this.getDataList()
@@ -105,5 +117,15 @@ export default {
   font-size: 12px;
   text-align: center;
   padding: .3rem;
+}
+.recommend-area{
+  margin-top: .3rem;
+  background-color: #fff;
+}
+.recommend-title{
+  padding: .3rem;
+  box-sizing: border-box;
+  font-size: 14px;
+  color: #FB0078;
 }
 </style>
