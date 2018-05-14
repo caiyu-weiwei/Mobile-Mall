@@ -33,7 +33,30 @@
       <div class="recommend-title">
         推荐商品
       </div>
-      <div class="recommend-body"></div>
+      <div class="recommend-body">
+        <swiper :options="swiperOption">
+          <swiper-slide v-for="(item, index) in recommendGoods" :key="index" >
+            <div class="recommend-item">
+              <img :src="item.image" style="width:80%;">
+              <div>{{item.goodsName}}</div>
+              <div>￥{{item.price}}(￥{{item.mallPrice}})</div>
+            </div>
+          </swiper-slide>
+        </swiper>
+        <div class="floor-anormaly">
+          <div class="floor-one">
+            <img :src="floor1_0.image" style="width:100%;">
+          </div>
+          <div class="floor-two">
+            <div>
+            <img :src="floor1_1.image" style="width:100%;">
+          </div>
+          <div>
+            <img :src="floor1_2.image" style="width:100%;">
+          </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -48,7 +71,15 @@ export default {
       location: require('../../assets/images/location.png'),
       bannerArray: [],
       navList: [],
-      advList: []
+      advList: [],
+      recommendGoods: [],
+      swiperOption: {
+        slidesPerView: 3
+      },
+      floor1: [],
+      floor1_0: {},
+      floor1_1: {},
+      floor1_2: {}
     }
   },
   components: {
@@ -69,6 +100,11 @@ export default {
           this.bannerArray = res.data.data.slides
           this.navList = res.data.data.category
           this.advList = res.data.data.advertesPicture
+          this.recommendGoods = res.data.data.recommend
+          this.floor1 = res.data.data.floor1
+          this.floor1_0 = this.floor1[0]
+          this.floor1_1 = this.floor1[1]
+          this.floor1_2 = this.floor1[2]
         })
         .catch((error) => {
           console.log(error)
@@ -127,5 +163,16 @@ export default {
   box-sizing: border-box;
   font-size: 14px;
   color: #FB0078;
+  border: 1px solid #eee;
+}
+.recommend-item{
+  border-right: 1px solid #eee;
+  font-size: 12px;
+  text-align: center;
+}
+.floor-anormaly{
+  display: flex;
+  flex-direction: row;
+  background-color: #fff;
 }
 </style>
