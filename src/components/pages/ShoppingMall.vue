@@ -43,7 +43,9 @@
             </div>
           </swiper-slide>
         </swiper>
-        <floorComponent :floorData="floor1"></floorComponent>
+        <floorComponent :floorData="floor1" :floorName="floorName.floor1"></floorComponent>
+        <floorComponent :floorData="floor2" :floorName="floorName.floor2"></floorComponent>
+        <floorComponent :floorData="floor3" :floorName="floorName.floor3"></floorComponent>
       </div>
     </div>
   </div>
@@ -65,7 +67,10 @@ export default {
       swiperOption: {
         slidesPerView: 3
       },
-      floor1: []
+      floor1: [],
+      floor2: [],
+      floor3: [],
+      floorName: {}
     }
   },
   components: {
@@ -89,6 +94,9 @@ export default {
           this.advList = res.data.data.advertesPicture
           this.recommendGoods = res.data.data.recommend
           this.floor1 = res.data.data.floor1
+          this.floor2 = res.data.data.floor2
+          this.floor3 = res.data.data.floor3
+          this.floorName = res.data.data.floorName
         })
         .catch((error) => {
           console.log(error)
@@ -151,6 +159,7 @@ export default {
 }
 .recommend-item{
   border-right: 1px solid #eee;
+  border-bottom: 1px solid #eee;
   font-size: 12px;
   text-align: center;
 }

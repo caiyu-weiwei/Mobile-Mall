@@ -12,7 +12,6 @@ export default {
 
 <style>
 #app {
-  min-height: 1200px;
   background-color: #f0f0f0;
 }
 </style>

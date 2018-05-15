@@ -1,22 +1,25 @@
 <template>
   <div class="floor">
+    <div class="floor-title">
+      {{floorName}}
+    </div>
     <div class="floor-anomaly">
-    <div class="floor-one">
+      <div class="floor-one">
         <img :src="floor1_0.image" style="width:100%;">
-    </div>
-    <div class="floor-two">
+      </div>
+      <div class="floor-two">
         <div>
-        <img :src="floor1_1.image" style="width:100%;">
-    </div>
-    <div>
-        <img :src="floor1_2.image" style="width:100%;">
-    </div>
-    </div>
+          <img :src="floor1_1.image" style="width:100%;">
+        </div>
+        <div>
+          <img :src="floor1_2.image" style="width:100%;">
+        </div>
+      </div>
     </div>
     <div class="floor-nomaly">
-    <div v-for="(item, index) in floorData.slice(3)" :key="index">
+      <div v-for="(item, index) in floorData.slice(3)" :key="index">
         <img :src="item.image" style="width: 100%;">
-    </div>
+      </div>
     </div>
   </div>
 </template>
@@ -30,12 +33,7 @@ export default {
       floor1_2: {}
     }
   },
-  props: {
-    floorData: {
-      type: Array,
-      default: []
-    }
-  },
+  props: ['floorData', 'floorName'],
   watch: {
     floorData: {
       handler (val, oldVal) {
@@ -52,7 +50,13 @@ export default {
 </script>
 
 <style scoped>
-  .floor-anomaly{
+.floor-title{
+  height: 1.8rem;
+  line-height: 1.8rem;
+  font-size: 14px;
+  text-align: center;
+}
+.floor-anomaly{
   display: flex;
   flex-direction: row;
   background-color: #fff;
