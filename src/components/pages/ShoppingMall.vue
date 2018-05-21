@@ -46,6 +46,18 @@
         <floorComponent :floorData="floor1" :floorName="floorName.floor1"></floorComponent>
         <floorComponent :floorData="floor2" :floorName="floorName.floor2"></floorComponent>
         <floorComponent :floorData="floor3" :floorName="floorName.floor3"></floorComponent>
+        <div class="hot-area">
+          <div class="hot-title">
+            热销商品
+          </div>
+          <div class="hot-goods">
+            <van-row>
+              <van-col v-for="(item, index) in hotGoods" :key="index">
+                <hotGoodsComponent :image="item.image" :goodsName="item.name" :goodsPrice="item.price" :mallPrice="item.mallPrice"></hotGoodsComponent>
+              </van-col>
+            </van-row>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -57,6 +69,7 @@ import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import floorComponent from '../component/floorComponent'
 import { toMoney } from '@/filter/moneyFilter.js'
+import hotGoodsComponent from '../component/hotGoodsComponent'
 export default {
   data () {
     return {
@@ -71,13 +84,15 @@ export default {
       floor1: [],
       floor2: [],
       floor3: [],
-      floorName: {}
+      floorName: {},
+      hotGoods: []
     }
   },
   components: {
     swiper,
     swiperSlide,
-    floorComponent
+    floorComponent,
+    hotGoodsComponent
   },
   created () {
     this.getDataList()
@@ -103,6 +118,7 @@ export default {
           this.floor2 = res.data.data.floor2
           this.floor3 = res.data.data.floor3
           this.floorName = res.data.data.floorName
+          this.hotGoods = res.data.data.hotGoods
         })
         .catch((error) => {
           console.log(error)
@@ -169,5 +185,15 @@ export default {
   font-size: 12px;
   text-align: center;
 }
-
+.hot-area{
+  height: 1.8rem;
+  line-height: 1.8rem;
+  background-color: #fff;
+  text-align: center;
+  font-size: 14px;
+}
+.hot-goods{
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
 </style>
